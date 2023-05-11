@@ -5,11 +5,11 @@ start:
 	npx vite
 
 start-production:
-	vite preview
+	npx vite preview
 
 build:
 	npx vite build
 
-analyze-bundle:
-	ANALYZE=true npx vite build
-	google-chrome dist/stats.html
+lint:
+	npx eslint .
+	npx tsc

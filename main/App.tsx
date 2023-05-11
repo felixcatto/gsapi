@@ -1,25 +1,35 @@
-import { useState } from 'react';
-import viteLogo from '/vite.svg';
+import originalAxios from 'axios';
+import { SWRConfig } from 'swr';
+import { Route, Switch } from 'wouter';
+import { IContext } from '../lib/types.js';
+import { Context, routes } from '../lib/utils.js';
+import { Repositories } from '../pages/repositories/index.jsx';
+import { Repository } from '../pages/repositories/repository.jsx';
 
 function App() {
-  const [count, setCount] = useState(0);
+  const axios = originalAxios.create();
+  axios.interceptors.response.use(
+    response => response.data,
+    error => {
+      console.log(error.response);
+      return Promise.reject(error);
+    }
+  );
+
+  const contextStore: IContext = { axios };
+
+  const swrConfig = { fetcher: axios.get, revalidateOnFocus: false };
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount(count => count + 1)}>count is {count}</button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">Click on the Vite and React logos to learn more</p>
-    </>
+    <Context.Provider value={contextStore}>
+      <SWRConfig value={swrConfig}>
+        <Switch>
+          <Route path={routes.home} component={Repositories} />
+          <Route path={routes.repositories} component={Repositories} />
+          <Route path={routes.repository} component={Repository} />
+        </Switch>
+      </SWRConfig>
+    </Context.Provider>
   );
 }
 

@@ -24,7 +24,7 @@ const rem2px = (input, fontSize = 16) => {
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['./client/**/*.{js,jsx,ts,tsx}'],
+  content: ['**/*.tsx'],
   theme: {
     spacing: rem2px(defaultTheme.spacing),
     extend: {
@@ -44,6 +44,5 @@ module.exports = {
       },
     },
   },
-  plugins: [],
   corePlugins: { container: false },
 };

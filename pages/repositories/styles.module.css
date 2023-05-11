@@ -1,0 +1,14 @@
+.searchSpinner {
+  position: absolute;
+  right: 10px;
+  top: 8px;
+}
+
+.reposTable {
+  min-width: 900px;
+}
+
+.languageBadge {
+  @apply text-white text-sm rounded-md inline-block px-2 py-1 mr-2 mb-2;
+  background: var(--primary);
+}
