@@ -1,0 +1,4 @@
+node_modules/
+dist/
+services/
+docker-compose.yml

@@ -1,0 +1,19 @@
+services:
+  app:
+    image: gsapi-app
+    build: .
+
+  caddy:
+    image: gsapi-caddy
+    build: server/services/caddy
+    depends_on:
+      - app
+    ports:
+      - 3000:443
+      - 3000:443/udp
+    volumes:
+      - caddy_data:/data
+      - $PWD/server/services/caddy/Caddyfile:/etc/caddy/Caddyfile
+
+volumes:
+  caddy_data:

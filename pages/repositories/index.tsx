@@ -1,4 +1,5 @@
 import cn from 'classnames';
+import { Link } from 'wouter';
 import Layout from '../../common/layout.tsx';
 import { getQueryParams, getUrl, useMergeState, useNavigate, useTable } from '../../lib/utils.tsx';
 import { Pagination } from '../../ui/Pagination.tsx';
@@ -21,7 +22,6 @@ export const Repositories = () => {
   const inputValue = hasChanges ? stateInputValue : searchQuery;
 
   const { data, isLoading } = useRepositories(searchQuery);
-  console.log(data);
 
   const { rows, totalRows, paginationProps } = useTable({
     rows: data,
@@ -72,16 +72,16 @@ export const Repositories = () => {
             {rows.map(repo => (
               <tr key={repo.id}>
                 <td>
-                  <a
+                  <Link
                     className="w-full truncate"
-                    href={getUrl(
+                    to={getUrl(
                       'repository',
                       { id: repo.id },
                       { owner: repo.ownerName, repo: repo.name }
                     )}
                   >
                     {repo.full_name}
-                  </a>
+                  </Link>
                 </td>
                 <td>{repo.stars}</td>
                 <td>{repo.lastCommitDate}</td>
