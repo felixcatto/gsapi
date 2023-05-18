@@ -32,6 +32,5 @@
   padding-top: var(--content-py);
   padding-bottom: var(--content-py);
   background: #fff;
-  box-shadow: inset 12px 0 20px -15px rgba(0, 0, 0, 0.4),
-    inset -12px 0 25px -12px rgba(0, 0, 0, 0.4);
+  box-shadow: inset 6px 0 6px rgba(0, 0, 0, 0.2), inset -6px 0 6px rgba(0, 0, 0, 0.2);
 }
